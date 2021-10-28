@@ -1,15 +1,22 @@
+
+Change `CARGO_HOME` path variable to whatever you want
+
+
+https://the.exa.website/install
+`$ cargo install exa`
+
+
 https://github.com/dandavison/delta#choosing-colors-styles
 
-` cargo install git-delta`
+`$ cargo install git-delta`
 
 
 https://github.com/sharkdp/bat#installation
 
-`cargo install --locked bat`
+`$ cargo install --locked bat`
 
 
-gruvbox some themes
-https://store.kde.org/p/1327719/
+gruvbox some themes https://store.kde.org/p/1327719/
 
 https://github.com/FilipeMCruz/dotfiles/tree/master/current
 
@@ -20,4 +27,4 @@ Update paths in zsh files
 
 starship https://starship.rs/guide/#%F0%9F%9A%80-installation
 
-`sh -c "$(curl -fsSL https://starship.rs/install.sh)"`
+`$ sh -c "$(curl -fsSL https://starship.rs/install.sh)"`
