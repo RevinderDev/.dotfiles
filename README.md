@@ -11,8 +11,8 @@
 
 ## Additional links
 
-[Gruvbox KDE theme](https://store.kde.org/p/1327719/)
-[Gruvbox Gnome theme](https://github.com/TheGreatMcPain/gruvbox-material-gtk)
+* [Gruvbox KDE theme](https://store.kde.org/p/1327719/)
+* [Gruvbox Gnome theme](https://github.com/TheGreatMcPain/gruvbox-material-gtk)
 
 ## TODO
 
