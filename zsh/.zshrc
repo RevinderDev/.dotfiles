@@ -9,6 +9,8 @@ export ZSH="/home/revinder/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="gruvbox"
+SOLARIZED_THEME="dark"
+export BAT_THEME="gruvbox-dark"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -69,16 +71,20 @@ ZSH_THEME="gruvbox"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git
-  gitfast
-  kubectl
-  docker
-  python
-  encode64
-  fzf
+	git
+	gitfast
+	kubectl
+	docker
+	python
+	encode64
+	cargo
+	rust
+	rustup
+	fzf
 )
 
 source $ZSH/oh-my-zsh.sh
+export FZF_BASE=/usr/bin/fzf
 
 # User configuration
 
@@ -105,9 +111,11 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias ls="exa"
+alias cat="bat"
+alias gdiff="git diff"
+alias gdiffc="git diff --cached"
+alias lg="lazygit"
 export PATH=$PATH:/home/revinder/.local/bin
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
 
 eval "$(starship init zsh)"

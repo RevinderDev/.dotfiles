@@ -1,0 +1,42 @@
+// Place your key bindings in this file to override the defaultsauto[]
+[
+    {
+        "key": "ctrl+alt+i",
+        "command": "glassit.increase"
+    },
+    {
+        "key": "ctrl+alt+z",
+        "command": "-glassit.increase"
+    },
+    {
+        "key": "ctrl+alt+k",
+        "command": "glassit.decrease"
+    },
+    {
+        "key": "ctrl+alt+c",
+        "command": "-glassit.decrease"
+    },
+    {
+        "key": "f5",
+        "command": "rust-analyzer.run"
+    },
+    {
+        "key": "shift+f5",
+        "command": "rust-analyzer.debug"
+    },
+    {
+        "key": "f5",
+        "command": "-workbench.action.debug.continue",
+        "when": "debugState == 'stopped'"
+    },
+    {
+        "key": "f5",
+        "command": "-workbench.action.debug.start",
+        "when": "debuggersAvailable && debugState == 'inactive'"
+    },
+    {
+        "key": "f5",
+        "command": "-debug.openView",
+        "when": "!debuggersAvailable"
+    }
+]

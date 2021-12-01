@@ -1,0 +1,80 @@
+{
+    "python.pythonPath": "F:\\Python\\python.exe",
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "workbench.iconTheme": "eq-material-theme-icons-darker",
+    "workbench.colorTheme": "Gruvbox Dark Hard",
+    "workbench.colorCustomizations": {
+        "activityBarBadge.background": "#388E3C",
+        "activityBar.activeBorder": "#388E3C",
+        "list.activeSelectionForeground": "#388E3C",
+        "list.inactiveSelectionForeground": "#388E3C",
+        "list.highlightForeground": "#388E3C",
+        "scrollbarSlider.activeBackground": "#388E3C50",
+        "editorSuggestWidget.highlightForeground": "#388E3C",
+        "textLink.foreground": "#388E3C",
+        "progressBar.background": "#388E3C",
+        "pickerGroup.foreground": "#388E3C",
+        "tab.activeBorder": "#388E3C",
+        "notificationLink.foreground": "#388E3C",
+        "editorWidget.resizeBorder": "#388E3C",
+        "editorWidget.border": "#388E3C",
+        "settings.modifiedItemIndicator": "#388E3C",
+        "settings.headerForeground": "#388E3C",
+        "panelTitle.activeBorder": "#388E3C",
+        "breadcrumb.activeSelectionForeground": "#388E3C",
+        "menu.selectionForeground": "#388E3C",
+        "menubar.selectionForeground": "#388E3C",
+        "editor.findMatchBorder": "#388E3C",
+        "selection.background": "#388E3C40",
+        "statusBarItem.remoteBackground": "#388E3C"
+    },
+    "materialTheme.accent": "Breaking Bad",
+    "C_Cpp.updateChannel": "Insiders",
+    "python.languageServer": "Default",
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter.notebook.ipynb"
+    },
+    "debug.allowBreakpointsEverywhere": true,
+    "debug.onTaskErrors": "showErrors",
+    "terminal.integrated.localEchoStyle": "bold",
+    "terminal.integrated.tabs.enabled": true,
+    "glassit.alpha": 245,
+    "terminal.integrated.profiles.linux": {
+        "bash": {
+            "path": "bash",
+            "icon": "terminal-bash"
+        },
+        "zsh": {
+            "path": "zsh"
+        },
+        "fish": {
+            "path": "fish"
+        },
+        "tmux": {
+            "path": "tmux",
+            "icon": "terminal-tmux"
+        },
+        "pwsh": {
+            "path": "pwsh",
+            "icon": "terminal-powershell"
+        }
+    },
+    "terminal.integrated.defaultProfile.windows": "C:\\Program Files\\PowerShell\\7\\pwsh.exe (migrated)",
+    "terminal.integrated.profiles.windows": {
+        "C:\\Program Files\\PowerShell\\7\\pwsh.exe (migrated)": {
+            "path": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+            "args": []
+        }
+    },
+    "editor.formatOnSave": true,
+    "rust-analyzer.checkOnSave.command": "clippy",
+    "vsicons.dontShowNewVersionMessage": true,
+    "rust-analyzer.inlayHints.enable": false,
+    "rust-analyzer.inlayHints.chainingHints": false,
+    "rust-analyzer.inlayHints.typeHints": false,
+    "rust-analyzer.inlayHints.parameterHints": false,
+    "editor.fontFamily": "Iosevka, 'Courier New', monospace",
+    "editor.fontSize": 16,
+    "editor.letterSpacing": 0.20
+}
