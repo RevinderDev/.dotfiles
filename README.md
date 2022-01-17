@@ -16,4 +16,5 @@
 
 ## TODO
 
-Rewrite nvims `vimscript` in `lua` and update it removing unnecessary plugins.
+1. Rewrite nvims `vimscript` in `lua` and update it removing unnecessary plugins.
+2. Automization
