@@ -17,4 +17,4 @@
 ## TODO
 
 1. Rewrite nvims `vimscript` in `lua` and update it removing unnecessary plugins.
-2. Automization
+2. Automization of installing and updating all necessary paths and whatnot.
