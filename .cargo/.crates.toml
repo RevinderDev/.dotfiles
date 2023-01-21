@@ -1,0 +1,23 @@
+[v1]
+"alacritty 0.13.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["alacritty"]
+"bandwhich 0.22.2 (registry+https://github.com/rust-lang/crates.io-index)" = ["bandwhich"]
+"bat 0.24.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["bat"]
+"exa 0.10.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["exa"]
+"git-delta 0.16.5 (registry+https://github.com/rust-lang/crates.io-index)" = ["delta"]
+"gitui 0.21.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["gitui"]
+"helix-term 0.6.0 (path+file:///home/michal/Desktop/Personal/helix/helix-term)" = ["hx"]
+"hyperfine 1.15.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["hyperfine"]
+"just 1.9.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["just"]
+"nu 0.90.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["nu"]
+"ripgrep 14.1.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["rg"]
+"rustlings 5.2.1 (path+file:///home/michal/Desktop/Personal/rustlings)" = ["rustlings"]
+"sniffnet 1.2.2 (registry+https://github.com/rust-lang/crates.io-index)" = ["sniffnet"]
+"speedtest-rs 0.1.4 (registry+https://github.com/rust-lang/crates.io-index)" = ["speedtest-rs"]
+"trunk 0.16.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["trunk"]
+"wasm-bindgen-cli 0.2.84 (registry+https://github.com/rust-lang/crates.io-index)" = [
+    "wasm-bindgen",
+    "wasm-bindgen-test-runner",
+    "wasm2es6js",
+]
+"zellij 0.39.2 (registry+https://github.com/rust-lang/crates.io-index)" = ["zellij"]
+"zoxide 0.9.3 (registry+https://github.com/rust-lang/crates.io-index)" = ["zoxide"]

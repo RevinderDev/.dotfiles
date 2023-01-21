@@ -1,0 +1,162 @@
+{
+    // Python
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        },
+        "editor.formatOnType": true,
+    },
+    "black-formatter.importStrategy": "fromEnvironment",
+    "ruff.importStrategy": "fromEnvironment",
+    "ruff.lint.args": [
+        "--config=${workspaceFolder}/ruff.toml"
+    ],
+    "workspaceKeybindings.makeFileCheck.enabled": true,
+    "python.analysis.typeCheckingMode": "off",
+
+    // Rust
+    "rust-analyzer.check.command": "clippy",
+    "rust-analyzer.rustfmt.rangeFormatting.enable": true,
+    "rust-analyzer.checkOnSave": true,
+    // "rust-analyzer.cargo.target": "wasm32-unknown-unknown",
+    "[rust]": {
+        "editor.defaultFormatter": "rust-lang.rust-analyzer",
+        "editor.formatOnSave": true
+    },
+
+    // Lua
+    "[dockercompose][lua]": {
+        "editor.formatOnSave": false,
+    },
+
+    // Javascript
+    "[javascript][typescript][typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+      },
+    "telemetry.telemetryLevel": "off",
+    "redhat.telemetry.enabled": false,
+    "yaml.customTags": [
+        "!And",
+        "!And sequence",
+        "!If",
+        "!If sequence",
+        "!Not",
+        "!Not sequence",
+        "!Equals",
+        "!Equals sequence",
+        "!Or",
+        "!Or sequence",
+        "!FindInMap",
+        "!FindInMap sequence",
+        "!Base64",
+        "!Join",
+        "!Join sequence",
+        "!Cidr",
+        "!Ref",
+        "!Sub",
+        "!Sub sequence",
+        "!GetAtt",
+        "!GetAZs",
+        "!ImportValue",
+        "!ImportValue sequence",
+        "!Select",
+        "!Select sequence",
+        "!Split",
+        "!Split sequence"
+    ],
+
+    // Theme
+    "glassit.alpha": 230,
+    "material-icon-theme.folders.theme": "classic",
+    "material-icon-theme.folders.color": "#e78a4e",
+    "workbench.iconTheme": "gruvbox-material-icon-theme",
+    "workbench.colorCustomizations": {
+        "[Gruvbox Dark Hard]": {
+            "editorInlayHint.foreground": "#5c5147",
+            "editorInlayHint.background": "#282828",
+            "editorGroupHeader.noTabsBackground": "#282828",
+            "editorGroupHeader.tabsBackground": "#282828",
+            "editorGroupHeader.tabsBorder": "#282828",
+            "editor.background": "#282828",
+            "statusBar.background": "#282828",
+            "sideBar.background": "#282828",
+            "titleBar.activeBackground": "#282828",
+            "titleBar.inactiveBackground": "#282828",
+            "tab.inactiveBackground": "#282828",
+            "terminal.background": "#282828",
+            // "editorWhitespace.foreground": "#776565e5",
+
+            "tab.activeBackground": "#221f1f",
+            "tab.activeBorder": "#201f1f",
+
+            // Right scrolling errors/warnings/info.
+            "editorOverviewRuler.errorForeground": "#0000",
+            "editorOverviewRuler.warningForeground": "#0000",
+            "editorOverviewRuler.infoForeground": "#fff0",
+
+            // Right scrolling git changes.
+            "editorOverviewRuler.addedForeground": "#0000",
+            "editorOverviewRuler.modifiedForeground": "#0000",
+            "editorOverviewRuler.deletedForeground": "#0000",
+
+        }
+    },
+
+    // Editor
+    "window.title": "${rootName}",
+    "explorer.confirmDelete": false,
+    "editor.inlayHints.enabled": "on",
+    "editor.hideCursorInOverviewRuler": true,
+    "editor.selectionHighlight": true,
+    "editor.matchBrackets": "never",
+    "files.autoSave": "afterDelay",
+    "window.titleBarStyle": "custom",
+    "window.dialogStyle": "custom",
+    "files.simpleDialog.enable": true,
+    "editor.scrollbar.horizontal": "hidden",
+    "editor.minimap.autohide": true,
+    "workbench.editor.limit.value": 1,
+    "workbench.editor.limit.perEditorGroup": true,
+    "window.menuBarVisibility": "compact",
+    "editor.wordWrap": "on",
+    "editor.minimap.enabled": false,
+    "editor.scrollbar.vertical": "visible",
+    "workbench.editor.showTabs": "multiple",
+    "terminal.integrated.enableMultiLinePasteWarning": "never",
+    "security.workspace.trust.untrustedFiles": "open",
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/.idea": true,
+        "**/.mypy_cache": true,
+        "**/.ruff_cache": true,
+        "**/.venv": true,
+        "**/env": true,
+        "**/venv": true
+    },
+
+    // Font settings
+    "editor.fontFamily": "JetBrainsMono Nerd Font",
+    "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font, monospace, monospace",
+    "editor.letterSpacing": 0.40,
+    "editor.fontSize": 14,
+    "editor.fontLigatures": true,
+    "editor.fontWeight": "700",
+    "editor.smoothScrolling": true,
+    "editor.experimentalWhitespaceRendering": "font",
+    "editor.renderWhitespace": "all",
+    "files.associations": {
+        ".docker-env": "dotenv"
+    },
+    "plantuml.exportFormat": "png",
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "workbench.colorTheme": "Gruvbox Dark Hard",
+    "workbench.activityBar.location": "hidden",
+    "workbench.sideBar.location": "right",
+    "window.zoomLevel": -1,
+
+}

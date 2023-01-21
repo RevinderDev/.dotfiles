@@ -1,0 +1,25 @@
+layout {
+    pane size=1 borderless=true {
+            plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
+                format_left  "#[fg=#fab387]{mode} | {tabs}"
+                format_space ""
+                format_right "{datetime}"
+
+
+                mode_normal  "#[fg=#f9e2af,bold] {name} "
+                mode_locked  "#[fg=#f38ba8,bold] {name} "
+
+                tab_normal   "#[fg=#928374] {name} "
+                tab_active   "#[fg=#b8bb26,bold] {name} "
+
+                datetime        "#[fg=#928374,bold] {format} "
+                datetime_format "%A, %d %b %Y %H:%M"
+                datetime_timezone "Europe/Berlin"
+
+                tab_separator           "#[fg=#f9e2af] | "
+            } 
+        }
+
+    pane
+
+}
