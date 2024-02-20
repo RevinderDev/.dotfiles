@@ -44,3 +44,4 @@ For rest of the setup look at `.cargo`
 1. Rewrite nvims `vimscript` in `lua` and update it removing unnecessary plugins.
 2. Automization of installing and updating all necessary paths and whatnot.
 3. Write better readme.
+4. Add screenshot showcasing awesomeness.
