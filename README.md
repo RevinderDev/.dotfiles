@@ -1,8 +1,9 @@
 # Revinder dotfiles.
 
 ## Installation
-1. Install stow 
+1. Install stow and initialize (`stow .`)
 2. Install this [font](https://github.com/be5invis/Iosevka)
+3. Upgrade paths in .gitconfig
 
 ## Additional tools:
 

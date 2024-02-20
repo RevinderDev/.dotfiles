@@ -1,8 +1,8 @@
 [user]
-        name = MKasprzyk
-        email = michal.kasprzyk@stxnext.pl
+    name = MKasprzyk
+    email = michal.kasprzyk@stxnext.pl
 [credential]
-        helper = cache
+    helper = cache
 
 
 [pager]
@@ -36,3 +36,9 @@
 
 [includeIf "gitdir:~/revinder-dotfiles/"]
     path = .gitconfig-personal
+
+[includeIf "gitdir:~/Desktop/Personal/"]
+    path = .gitconfig-personal
+
+[includeIf "gitdir:~/Desktop/STXNext/"]
+    path = .gitconfig-stx
