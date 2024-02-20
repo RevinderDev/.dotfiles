@@ -1,5 +1,5 @@
 [user]
-        name = KasprzykM
+        name = MKasprzyk
         email = michal.kasprzyk@stxnext.pl
 [credential]
         helper = cache
@@ -33,3 +33,6 @@
     line-numbers-plus-style = 28
 [push]
     default = current
+
+[includeIf "gitdir:~/revinder-dotfiles"]
+    path = .gitconfig-personal
