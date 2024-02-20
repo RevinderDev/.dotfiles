@@ -34,5 +34,5 @@
 [push]
     default = current
 
-[includeIf "gitdir:~/revinder-dotfiles"]
+[includeIf "gitdir:~/revinder-dotfiles/"]
     path = .gitconfig-personal
