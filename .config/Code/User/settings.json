@@ -158,5 +158,9 @@
     "workbench.activityBar.location": "hidden",
     "workbench.sideBar.location": "right",
     "window.zoomLevel": -1,
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "python.defaultInterpreterPath": "/home/michal/Desktop/STXNext/Essence/integrated-search-service/.venv",
 
 }

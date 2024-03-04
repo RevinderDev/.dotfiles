@@ -2,7 +2,7 @@
 "alacritty 0.13.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["alacritty"]
 "bandwhich 0.22.2 (registry+https://github.com/rust-lang/crates.io-index)" = ["bandwhich"]
 "bat 0.24.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["bat"]
-"exa 0.10.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["exa"]
+"eza 0.18.5 (registry+https://github.com/rust-lang/crates.io-index)" = ["eza"]
 "git-delta 0.16.5 (registry+https://github.com/rust-lang/crates.io-index)" = ["delta"]
 "gitui 0.21.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["gitui"]
 "helix-term 0.6.0 (path+file:///home/michal/Desktop/Personal/helix/helix-term)" = ["hx"]

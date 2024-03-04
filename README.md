@@ -1,8 +1,12 @@
-# Revinder dotfiles.
+# My personal dotfiles for
+
+<p align="center">
+    <img src=".github/Desktop.png">
+</p>
 
 ## Installation
 1. Install stow and initialize (`stow .`)
-2. Install this [font](https://github.com/be5invis/Iosevka)
+2. Install this [Iosevka](https://typeof.net/Iosevka/) or [JetbrainsMono](https://www.jetbrains.com/lp/mono/)
 3. Upgrade paths in .gitconfig
 
 ## Additional tools:
@@ -35,14 +39,10 @@ For rest of the setup look at `.cargo`
 * Starhsip sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 * zoxide
 
-## Additional links
-
-* [Gruvbox KDE theme](https://store.kde.org/p/1327719/)
-* [Gruvbox Gnome theme](https://github.com/TheGreatMcPain/gruvbox-material-gtk)
-
 ## TODO
 
 1. Rewrite nvims `vimscript` in `lua` and update it removing unnecessary plugins.
 2. Automization of installing and updating all necessary paths and whatnot.
 3. Write better readme.
 4. Add screenshot showcasing awesomeness.
+5. Delete old configs.
