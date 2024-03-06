@@ -1,5 +1,8 @@
 [aws]
 disabled = true
 
+[gcloud]
+disabled = true
+
 [package]
 disabled = true
