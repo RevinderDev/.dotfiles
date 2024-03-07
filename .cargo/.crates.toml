@@ -8,7 +8,6 @@
 "just 1.9.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["just"]
 "nu 0.90.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["nu"]
 "ripgrep 14.1.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["rg"]
-"rustlings 5.2.1 (path+file:///home/michal/Desktop/Personal/rustlings)" = ["rustlings"]
 "sniffnet 1.2.2 (registry+https://github.com/rust-lang/crates.io-index)" = ["sniffnet"]
 "speedtest-rs 0.1.4 (registry+https://github.com/rust-lang/crates.io-index)" = ["speedtest-rs"]
 "trunk 0.16.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["trunk"]
