@@ -4,6 +4,7 @@
 "bat 0.24.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["bat"]
 "eza 0.18.5 (registry+https://github.com/rust-lang/crates.io-index)" = ["eza"]
 "git-delta 0.16.5 (registry+https://github.com/rust-lang/crates.io-index)" = ["delta"]
+"hurl 4.2.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["hurl"]
 "hyperfine 1.15.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["hyperfine"]
 "just 1.9.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["just"]
 "nu 0.90.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["nu"]
