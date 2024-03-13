@@ -4,6 +4,14 @@ ZSH_THEME="gallois"
 SOLARIZED_THEME="dark"
 export BAT_THEME="gruvbox-dark"
 
+# Python
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+export PATH="$HOME/.poetry/bin:$PATH"
+
+eval "$(pyenv init --path)" # This must happen before pyenv plugin initialization: see https://github.com/pyenv/pyenv/issues/2041#issuecomment-990253001
+eval "$(pyenv virtualenv-init -)"
+
 plugins=(
 	zsh-autosuggestions
 	zsh-syntax-highlighting
@@ -29,14 +37,6 @@ bindkey '^ ' autosuggest-accept
 alias ls="eza --icons"
 alias lg="lazygit"
 
-# Python
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$HOME/.local/bin:$PYENV_ROOT/bin:$PATH"
-export PIPENV_PYTHON="$PYENV_ROOT/shims/python"
-export PATH="$HOME/.poetry/bin:$PATH"
-
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
 
 # Zellij
 export ZELLIJ_CONFIG_FILE=~/.config/zellij/config.kdl
