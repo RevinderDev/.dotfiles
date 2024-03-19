@@ -59,7 +59,7 @@ function nvimvenv {
 }
 
 alias nvim=nvimvenv
-
+alias neovide="neovide --frame none"
 
 # Node 
 export NVM_DIR="/home/michal/.nvm"
