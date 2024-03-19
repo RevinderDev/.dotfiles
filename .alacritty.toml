@@ -10,19 +10,19 @@ TERM = "xterm-256color"
 size = 12.0
 
 [font.bold]
-family = "Iosevka NF"
+family = "Iosevka Term NerdFont"
 style = "Bold"
 
 [font.bold_italic]
-family = "Iosevka NF"
+family = "Iosevka Term NerdFont"
 style = "Bold Italic"
 
 [font.italic]
-family = "Iosevka NF"
+family = "Iosevka Term NerdFont"
 style = "Italic"
 
 [font.normal]
-family = "Iosevka NF"
+family = "Iosevka Term NerdFont"
 style = "normal"
 
 [font.offset]

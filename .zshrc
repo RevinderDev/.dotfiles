@@ -6,7 +6,7 @@ export BAT_THEME="gruvbox-dark"
 
 # Python
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 export PATH="$HOME/.poetry/bin:$PATH"
 
 eval "$(pyenv init --path)" # This must happen before pyenv plugin initialization: see https://github.com/pyenv/pyenv/issues/2041#issuecomment-990253001
@@ -93,3 +93,6 @@ bindkey '^L' clear-scrollback-buffer
 eval "$(starship init zsh)"
 # Zoxide
 eval "$(zoxide init zsh)"
+
+# Created by `pipx` on 2024-03-14 08:04:57
+export PATH="$PATH:/home/michal/.local/bin"
