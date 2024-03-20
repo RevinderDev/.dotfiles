@@ -48,17 +48,17 @@ export PATH=$PATH:$HOME/go/bin
 
 
 # Neovim
-function nvimvenv {
-  if [[ -e "$VIRTUAL_ENV" && -f "$VIRTUAL_ENV/bin/activate" ]]; then
-    source "$VIRTUAL_ENV/bin/activate"
-    command nvim "$@"
-    deactivate
-  else
-    command nvim "$@"
-  fi
-}
+# function nvimvenv {
+#   if [[ -e "$VIRTUAL_ENV" && -f "$VIRTUAL_ENV/bin/activate" ]]; then
+#     source "$VIRTUAL_ENV/bin/activate"
+#     command nvim "$@"
+#     deactivate
+#   else
+#     command nvim "$@"
+#   fi
+# }
 
-alias nvim=nvimvenv
+# alias nvim=nvimvenv
 alias neovide="neovide --frame none"
 
 # Node 
