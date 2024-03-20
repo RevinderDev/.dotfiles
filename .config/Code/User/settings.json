@@ -160,11 +160,5 @@
     "window.zoomLevel": -1,
     "[html]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "python.defaultInterpreterPath": "/home/michal/Desktop/STXNext/Essence/integrated-search-service/.venv",
-    "Lua.workspace.library": [
-        "/home/michal/.vscode/extensions/ketho.wow-api-0.13.3/EmmyLua/API",
-        "/home/michal/.vscode/extensions/ketho.wow-api-0.13.3/EmmyLua/Optional"
-    ],
-
+    }
 }
