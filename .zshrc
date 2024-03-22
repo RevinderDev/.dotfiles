@@ -26,6 +26,7 @@ plugins=(
 	fzf
 	pyenv
 	poetry
+	zoxide
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -46,19 +47,8 @@ export ZELLIJ_CONFIG_FILE=~/.config/zellij/config.kdl
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
 
-
 # Neovim
-# function nvimvenv {
-#   if [[ -e "$VIRTUAL_ENV" && -f "$VIRTUAL_ENV/bin/activate" ]]; then
-#     source "$VIRTUAL_ENV/bin/activate"
-#     command nvim "$@"
-#     deactivate
-#   else
-#     command nvim "$@"
-#   fi
-# }
-
-# alias nvim=nvimvenv
+export PATH="$PATH:/opt/nvim-linux64/bin"
 alias neovide="neovide --frame none"
 
 # Node 
