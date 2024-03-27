@@ -35,7 +35,7 @@ export FZF_BASE=/usr/bin/fzf
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#989898,bold"
 bindkey '^ ' autosuggest-accept
 
-alias ls="eza --icons"
+alias ls="eza -a -l --header --icons --hyperlink --time-style relative"
 alias lg="lazygit"
 
 
