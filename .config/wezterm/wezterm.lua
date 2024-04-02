@@ -87,10 +87,16 @@ config.keys = {
 	{ key = "p", mods = "CTRL", action = act({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
 	{ key = "w", mods = "CTRL", action = act.CloseCurrentPane({ confirm = true }) },
 
+	-- Navigating
 	{ key = "LeftArrow", mods = "ALT", action = act.ActivatePaneDirection("Left") },
 	{ key = "RightArrow", mods = "ALT", action = act.ActivatePaneDirection("Right") },
 	{ key = "UpArrow", mods = "ALT", action = act.ActivatePaneDirection("Up") },
 	{ key = "DownArrow", mods = "ALT", action = act.ActivatePaneDirection("Down") },
+
+	{ key = "h", mods = "ALT", action = act.ActivatePaneDirection("Left") },
+	{ key = "l", mods = "ALT", action = act.ActivatePaneDirection("Right") },
+	{ key = "k", mods = "ALT", action = act.ActivatePaneDirection("Up") },
+	{ key = "j", mods = "ALT", action = act.ActivatePaneDirection("Down") },
 
 	{ key = "LeftArrow", mods = "ALT|CTRL", action = act.AdjustPaneSize({ "Left", 5 }) },
 	{ key = "DownArrow", mods = "ALT|CTRL", action = act.AdjustPaneSize({ "Down", 5 }) },
