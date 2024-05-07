@@ -43,4 +43,4 @@
 [includeIf "gitdir:~/Desktop/STXNext/"]
     path = .gitconfig-stx
 [branch]
-	sort = -comitterdate
+	sort = -committerdate
