@@ -56,8 +56,12 @@ export NVM_DIR="/home/michal/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
 # Hurl
-function hurl {
+function hurljq {
   command hurl "$@" | jq
+}
+
+function hurlcsv {
+  command hurl "$@" | csvlook 
 }
 
 # Utils
