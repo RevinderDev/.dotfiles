@@ -6,6 +6,7 @@
 "bunyan 0.1.9 (registry+https://github.com/rust-lang/crates.io-index)" = ["bunyan"]
 "cargo-audit 0.20.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-audit"]
 "cargo-expand 1.0.88 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-expand"]
+"cargo-nextest 0.9.78 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-nextest"]
 "cargo-tarpaulin 0.30.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-tarpaulin"]
 "cargo-udeps 0.1.49 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-udeps"]
 "cargo-watch 8.5.2 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-watch"]
