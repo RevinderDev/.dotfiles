@@ -17,8 +17,8 @@ config.font = wezterm.font_with_fallback({
 config.tab_max_width = 50
 config.colors = {
 	tab_bar = {
-		background = "#3c3836",
-		inactive_tab_edge = "#3c3836",
+		background = "282828",
+		inactive_tab_edge = "#282828",
 
 		active_tab = {
 			bg_color = "#282828",
@@ -27,7 +27,7 @@ config.colors = {
 		},
 
 		inactive_tab = {
-			bg_color = "#3c3836",
+			bg_color = "#282828",
 			fg_color = "#665c54",
 		},
 
@@ -84,18 +84,18 @@ wezterm.on("update-status", function(window, pane)
 
 	local callbacks = {
 		{
-			name = "hostname",
+			name = "calendar",
 			func = function()
-				return "" .. wezterm.hostname()
+				return wezterm.strftime("%A %Y-%b-%d")
 			end,
-			icon = wezterm.nerdfonts.cod_server,
+			icon = wezterm.nerdfonts.md_calendar_month,
 		},
 		{
 			name = "clock",
 			func = function()
 				return wezterm.time.now():format("%H:%M")
 			end,
-			icon = wezterm.nerdfonts.md_calendar_clock,
+			icon = wezterm.nerdfonts.md_av_timer,
 		},
 		{
 			name = "cwd",
