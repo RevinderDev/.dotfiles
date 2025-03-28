@@ -125,8 +125,8 @@ wezterm.on("format-tab-title", function(tab, _, _, conf, _, _)
 	local index = tab.tab_index + 1
 	local title = " [" .. index .. "] " .. utilities.get_tab_title(tab) .. " "
 
-	local width = conf.tab_max_width
-	if #title > conf.tab_max_width then
+	local width = 15
+	if #title > width then
 		title = wezterm.truncate_right(title, width) .. "…"
 	end
 
