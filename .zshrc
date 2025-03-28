@@ -48,8 +48,8 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
 
 # Neovim
-export PATH="$PATH:/opt/nvim-linux64/bin"
-alias neovide="neovide --frame none"
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+alias neovide="neovide --fork --frame none"
 
 # Node 
 export NVM_DIR="/home/michal/.nvm"
