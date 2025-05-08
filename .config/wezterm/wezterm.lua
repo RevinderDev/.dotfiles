@@ -6,7 +6,7 @@ local config = wezterm.config_builder()
 config.color_scheme = "Gruvbox dark, medium (base16)"
 config.font = wezterm.font_with_fallback({
 	{
-		family = "IosevkaTerm Nerd Font",
+		family = "DepartureMono Nerd Font Propo",
 		harfbuzz_features = {
 			"liga", -- (default) ligatures
 			"clig", -- (default) contextual ligatures
@@ -14,7 +14,13 @@ config.font = wezterm.font_with_fallback({
 	},
 })
 
+-- Image rendering
+config.enable_kitty_keyboard = true
+config.enable_kitty_graphics = true
+
 config.tab_max_width = 50
+config.max_fps = 240
+config.animation_fps = 240
 config.colors = {
 	tab_bar = {
 		background = "282828",
@@ -145,6 +151,16 @@ config.font_size = 12
 config.window_background_opacity = 0.9
 config.adjust_window_size_when_changing_font_size = false
 config.show_new_tab_button_in_tab_bar = false
+config.window_frame = {
+	border_left_width = "0.4cell", -- Or '1px', '10pt', etc.
+	border_right_width = "0.4cell",
+	border_bottom_height = "0.2cell",
+	border_top_height = "0.2cell",
+	border_left_color = "#7d7d7d",
+	border_right_color = "#7d7d7d",
+	border_bottom_color = "#7d7d7d",
+	border_top_color = "#7d7d7d",
+}
 
 -- Keybindings
 local act = wezterm.action
