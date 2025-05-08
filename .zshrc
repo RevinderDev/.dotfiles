@@ -37,6 +37,7 @@ bindkey '^ ' autosuggest-accept
 
 alias ls="eza -a -l --header --icons --hyperlink --time-style relative"
 alias lg="lazygit"
+alias img="wezterm imgcat $@"
 
 
 # Zellij
