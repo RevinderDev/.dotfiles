@@ -91,3 +91,4 @@ eval "$(zoxide init zsh)"
 
 # Created by `pipx` on 2024-03-14 08:04:57
 export PATH="$PATH:/home/michal/.local/bin"
+gsettings set org.gnome.desktop.interface enable-animations false
