@@ -6,7 +6,7 @@ local config = wezterm.config_builder()
 config.color_scheme = "Gruvbox dark, medium (base16)"
 config.font = wezterm.font_with_fallback({
 	{
-		family = "DepartureMono Nerd Font Propo",
+		family = "IosevkaTerm Nerd Font",
 		harfbuzz_features = {
 			"liga", -- (default) ligatures
 			"clig", -- (default) contextual ligatures
@@ -152,8 +152,8 @@ config.window_background_opacity = 0.9
 config.adjust_window_size_when_changing_font_size = false
 config.show_new_tab_button_in_tab_bar = false
 config.window_frame = {
-	border_left_width = "0.35cell", -- Or '1px', '10pt', etc.
-	border_right_width = "0.35cell",
+	border_left_width = "0.4cell", -- Or '1px', '10pt', etc.
+	border_right_width = "0.4cell",
 	border_bottom_height = "0.175cell",
 	border_top_height = "0.175cell",
 	border_left_color = "#7d7d7d",

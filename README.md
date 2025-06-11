@@ -5,10 +5,7 @@
 
 ## 📋 Installation
 1. Install all development tools from [Tools](#tools)
-2. Install fonts: [Iosevka Nerd Font](https://typeof.net/Iosevka/) and [JetbrainsMono Nerd Font](https://www.jetbrains.com/lp/mono/):
-    * unzip downloaded files into `~/.fonts`
-    * rebuild font cache `$ fc-cache -fv`
-    * you can check if they are installed with `$ fc-list | rg "<font name>"`
+2. Used fonts: [Iosevka Nerd Font](https://typeof.net/Iosevka/) and [JetbrainsMono Nerd Font](https://www.jetbrains.com/lp/mono/):
 3. Install [Stow](https://www.gnu.org/software/stow/) and initialize in root directory: (`$ stow .`) 
 4. Upgrade paths and email in `.gitconfig`
 
