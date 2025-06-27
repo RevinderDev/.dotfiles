@@ -4,14 +4,6 @@ ZSH_THEME="gallois"
 SOLARIZED_THEME="dark"
 export BAT_THEME="gruvbox-dark"
 
-# Python
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-export PATH="$HOME/.poetry/bin:$PATH"
-
-eval "$(pyenv init --path)" # This must happen before pyenv plugin initialization: see https://github.com/pyenv/pyenv/issues/2041#issuecomment-990253001
-eval "$(pyenv virtualenv-init -)"
-
 plugins=(
 	zsh-autosuggestions
 	zsh-syntax-highlighting
@@ -24,7 +16,6 @@ plugins=(
 	encode64
 	rust
 	fzf
-	pyenv
 	poetry
 	zoxide
 )
@@ -83,7 +74,7 @@ function clear-scrollback-buffer {
 zle -N clear-scrollback-buffer
 bindkey '^L' clear-scrollback-buffer
 
-
+alias python="python3"
 # Starship
 eval "$(starship init zsh)"
 # Zoxide
@@ -92,3 +83,5 @@ eval "$(zoxide init zsh)"
 # Created by `pipx` on 2024-03-14 08:04:57
 export PATH="$PATH:/home/michal/.local/bin"
 gsettings set org.gnome.desktop.interface enable-animations false
+eval "$(uv generate-shell-completion zsh)"
+eval "$(uvx --generate-shell-completion zsh)"
