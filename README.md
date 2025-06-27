@@ -10,7 +10,7 @@
 
 ## 🛠️ Tools
 
-In all honesty, this is meant for personal and I rarely change systems, which is why you have to install few tools manaully. For me, this hasn't been an issue before.
+In all honesty, this is meant for personal use only and I rarely change systems, which is why you have to install few tools manaully. For me, this hasn't been an issue before.
 
 * `tools.sh` - contains list of specific tools that I use on a daily basis
 * `gnome.sh` - contains gnome specific tools. There are some dconf configs for `openbar` and `roundedcorners` extensions that need to be loaded. See .config
