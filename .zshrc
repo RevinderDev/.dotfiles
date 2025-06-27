@@ -80,8 +80,6 @@ eval "$(starship init zsh)"
 # Zoxide
 eval "$(zoxide init zsh)"
 
-# Created by `pipx` on 2024-03-14 08:04:57
 export PATH="$PATH:/home/michal/.local/bin"
-gsettings set org.gnome.desktop.interface enable-animations false
 eval "$(uv generate-shell-completion zsh)"
 eval "$(uvx --generate-shell-completion zsh)"
