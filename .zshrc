@@ -4,6 +4,8 @@ ZSH_THEME="gallois"
 SOLARIZED_THEME="dark"
 export BAT_THEME="gruvbox-dark"
 
+gsettings set org.gnome.desktop.interface enable-animations false
+
 plugins=(
 	zsh-autosuggestions
 	zsh-syntax-highlighting
@@ -26,7 +28,7 @@ export FZF_BASE=/usr/bin/fzf
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#989898,bold"
 bindkey '^ ' autosuggest-accept
 
-alias ls="eza -a -l --header --icons --hyperlink --time-style relative"
+alias ls="eza -a -l --header --icons --time-style relative --group-directories-first"
 alias lg="lazygit"
 alias img="wezterm imgcat $@"
 
@@ -42,6 +44,8 @@ export PATH=$PATH:$HOME/go/bin
 # Neovim
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 alias neovide="neovide --fork --frame none"
+export EDITOR="nvim"
+export SUDO_EDITOR="$EDITOR"
 
 # Node 
 export NVM_DIR="/home/michal/.nvm"
