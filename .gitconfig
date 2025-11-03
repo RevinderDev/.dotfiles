@@ -5,7 +5,7 @@
         helper = cache
 
 [pager]
-        diff = delta
+        ;diff = delta
         log = delta
         reflog = delta
         show = delta
@@ -51,8 +51,8 @@
         untrackedCache = true
 [merge]
         conflictstyle = zdiff3 
-[pull]
-        rebase = true
+; [pull]
+;         rebase = true
 
 [interactive]
         diffFilter = delta --color-only --features=interactive
@@ -78,12 +78,16 @@
     default = current
 
 [includeIf "gitdir:~/revinder-dotfiles/"]
-    path = .gitconfig-personal
+        path = .gitconfig-personal
 
 [includeIf "gitdir:~/Desktop/Personal/"]
-    path = .gitconfig-personal
+        path = .gitconfig-personal
 
-[includeIf "gitdir:~/Desktop/STXNext/"]
-    path = .gitconfig-stx
+; [includeIf "gitdir:~/Desktop/STXNext/AAI/"]
+;         path = ~/.gitconfig-wurth
+
+[includeIf "gitdir:~/Desktop/STXNext/AAI/conrad/"]
+        path = .gitconfig-conrad
+
 [branch]
 	sort = -committerdate

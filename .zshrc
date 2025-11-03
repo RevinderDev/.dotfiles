@@ -84,6 +84,35 @@ eval "$(starship init zsh)"
 # Zoxide
 eval "$(zoxide init zsh)"
 
+
+typeset -A pomo_options
+pomo_options[work]="25"
+pomo_options[break]="5"
+
+function pomodoro() {
+  local session_type="$1"
+  
+  if [[ -n "$session_type" && -n "${pomo_options[$session_type]}" ]]; then
+    echo "Pomodoro: $session_type" 
+    timer "${pomo_options[$session_type]}m"
+    notify-send "'$session_type' session done"
+  else
+    echo "Invalid pomodoro session type. Use 'work' or 'break'."
+  fi
+}
+
+alias workdo='pomodoro work'
+alias workbreak='pomodoro break'
+
 export PATH="$PATH:/home/michal/.local/bin"
 eval "$(uv generate-shell-completion zsh)"
 eval "$(uvx --generate-shell-completion zsh)"
+
+# pnpm
+export PNPM_HOME="/home/michal/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+eval "$(/home/michal/.local/bin/mise activate zsh)"

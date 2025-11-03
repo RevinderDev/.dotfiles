@@ -1,0 +1,6 @@
+[user]
+	name = KasprzykMichal
+	email = m.ma@appliedai.de 
+
+[core]
+    sshCommand = "ssh -i ~/.ssh/wurth" 

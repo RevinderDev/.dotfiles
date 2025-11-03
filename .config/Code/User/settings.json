@@ -117,7 +117,7 @@
     "window.dialogStyle": "custom",
     "files.simpleDialog.enable": true,
     "editor.scrollbar.horizontal": "hidden",
-    "editor.minimap.autohide": true,
+    "editor.minimap.autohide": "mouseover",
     "workbench.editor.limit.value": 1,
     "workbench.editor.limit.perEditorGroup": true,
     "window.menuBarVisibility": "compact",
