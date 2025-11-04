@@ -1,0 +1,12 @@
+[tools]
+"cargo:bat" = "0.26.0"
+"cargo:eza" = "0.23.4"
+"cargo:git-delta" = "0.18.2"
+"cargo:hurl" = "7.0.0"
+"cargo:hyperfine" = "1.19.0"
+"cargo:just" = "1.43.0"
+"cargo:neovide" = "0.15.2"
+"cargo:ripgrep" = "15.1.0"
+"cargo:zoxide" = "0.9.8"
+node = "25.1.0"
+rust = "1.91.0"
