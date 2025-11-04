@@ -8,5 +8,7 @@
 "cargo:neovide" = "0.15.2"
 "cargo:ripgrep" = "15.1.0"
 "cargo:zoxide" = "0.9.8"
+lazygit = "0.52"
 node = "25.1.0"
 rust = "1.91.0"
+zig = "0.15.2"
