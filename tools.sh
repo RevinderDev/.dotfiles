@@ -1,9 +1,13 @@
 # CLI Tools
-sudo apt install -y fzf fd-find flameshot 
+sudo apt install -y fzf fd-find flameshot xclip
 
+# ZSH
+sudo apt install zsh
 # Oh-My-Zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
+# Oh-My-Zsh Plugins
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
 # Ulauncher
 sudo add-apt-repository universe -y && sudo add-apt-repository ppa:agornostal/ulauncher -y && sudo apt update && sudo apt install ulauncher
@@ -42,3 +46,6 @@ LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/re
 curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
 tar xf lazygit.tar.gz lazygit
 sudo install lazygit -D -t /usr/local/bin/
+
+# Mise and then install tools from mise/config.toml
+curl https://mise.run | sh

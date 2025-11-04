@@ -6,9 +6,16 @@ export BAT_THEME="gruvbox-dark"
 
 gsettings set org.gnome.desktop.interface enable-animations false
 
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+autoload -U compinit && compinit
+
+# Mise
+eval "$(~/.local/bin/mise activate zsh)"
+
 plugins=(
 	zsh-autosuggestions
 	zsh-syntax-highlighting
+	zsh-completions
 	git
 	gitfast
 	kubectl
@@ -81,8 +88,6 @@ bindkey '^L' clear-scrollback-buffer
 alias python="python3"
 # Starship
 eval "$(starship init zsh)"
-# Zoxide
-eval "$(zoxide init zsh)"
 
 
 typeset -A pomo_options
@@ -115,4 +120,6 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-eval "$(/home/michal/.local/bin/mise activate zsh)"
+
+# Zoxide
+eval "$(zoxide init zsh)"
