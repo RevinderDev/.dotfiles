@@ -1,6 +1,3 @@
-[user]
-        name = MKasprzyk
-        email = michal.kasprzyk@stxnext.pl
 [credential]
         helper = cache
 
@@ -77,17 +74,14 @@
 [push]
     default = current
 
-[includeIf "gitdir:~/revinder-dotfiles/"]
+[includeIf "gitdir:~/.dotfiles/"]
         path = .gitconfig-personal
 
-[includeIf "gitdir:~/Desktop/Personal/"]
+[includeIf "gitdir:~/Personal/"]
         path = .gitconfig-personal
 
-; [includeIf "gitdir:~/Desktop/STXNext/AAI/"]
-;         path = ~/.gitconfig-wurth
-
-[includeIf "gitdir:~/Desktop/STXNext/AAI/conrad/"]
-        path = .gitconfig-conrad
+[includeIf "gitdir:~/STXNext/"]
+        path = .gitconfig-stx
 
 [branch]
 	sort = -committerdate
