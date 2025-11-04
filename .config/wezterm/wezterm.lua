@@ -17,6 +17,7 @@ config.font = wezterm.font_with_fallback({
 -- Image rendering
 config.enable_kitty_keyboard = true
 config.enable_kitty_graphics = true
+config.warn_about_missing_glyphs = false
 
 config.tab_max_width = 50
 config.max_fps = 240
