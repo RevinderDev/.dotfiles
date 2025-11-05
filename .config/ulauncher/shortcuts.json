@@ -29,14 +29,24 @@
         "run_without_argument": false,
         "added": 1743580549.4476707
     },
-    "dae1072d-a284-401a-b603-09ecf89e4329": {
-        "id": "dae1072d-a284-401a-b603-09ecf89e4329",
-        "name": "AI",
-        "keyword": "ai",
-        "cmd": "http://localhost:3000",
-        "icon": "~/Downloads/5960_NotLikeThis.png",
-        "is_default_search": false,
+    "d81cf975-6924-4a3b-9acb-39ba891ba3e8": {
+        "id": "d81cf975-6924-4a3b-9acb-39ba891ba3e8",
+        "name": "Gemini",
+        "keyword": "gem",
+        "cmd": "https://gemini.google.com/app",
+        "icon": "~/Pictures/Gemini.png",
+        "is_default_search": true,
         "run_without_argument": true,
-        "added": 1751055701.3078947
+        "added": 1762360973.7711499
+    },
+    "4ad37bd9-383e-4ffd-a902-3cd9d786ca67": {
+        "id": "4ad37bd9-383e-4ffd-a902-3cd9d786ca67",
+        "name": "YouTube",
+        "keyword": "yt",
+        "cmd": "https://www.youtube.com/results?search_query=%s",
+        "icon": "~/Pictures/youtube.png",
+        "is_default_search": false,
+        "run_without_argument": false,
+        "added": 1762361365.4301865
     }
 }
