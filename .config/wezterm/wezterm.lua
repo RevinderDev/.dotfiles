@@ -148,20 +148,25 @@ config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
 config.window_decorations = "RESIZE"
 config.skip_close_confirmation_for_processes_named = {}
-config.font_size = 12
 config.window_background_opacity = 0.9
 config.adjust_window_size_when_changing_font_size = false
 config.show_new_tab_button_in_tab_bar = false
--- config.window_frame = {
--- 	border_left_width = "0.4cell", -- Or '1px', '10pt', etc.
--- 	border_right_width = "0.4cell",
--- 	border_bottom_height = "0.175cell",
--- 	border_top_height = "0.175cell",
--- 	border_left_color = "#7d7d7d",
--- 	border_right_color = "#7d7d7d",
--- 	border_bottom_color = "#7d7d7d",
--- 	border_top_color = "#7d7d7d",
--- }
+config.font_size = 15
+
+local v_border_pt = 0.150 * config.font_size
+local h_border_pt = 0.150 * config.font_size
+
+config.window_frame = {
+	border_left_width = tostring(h_border_pt) .. "pt",
+	border_right_width = tostring(h_border_pt) .. "pt",
+	border_bottom_height = tostring(v_border_pt) .. "pt",
+	border_top_height = tostring(v_border_pt) .. "pt",
+
+	border_left_color = "#7d7d7d",
+	border_right_color = "#7d7d7d",
+	border_bottom_color = "#7d7d7d",
+	border_top_color = "#7d7d7d",
+}
 
 -- Keybindings
 local act = wezterm.action
