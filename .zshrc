@@ -86,9 +86,6 @@ zle -N clear-scrollback-buffer
 bindkey '^L' clear-scrollback-buffer
 
 alias python="python3"
-# Starship
-eval "$(starship init zsh)"
-
 
 typeset -A pomo_options
 pomo_options[work]="25"
