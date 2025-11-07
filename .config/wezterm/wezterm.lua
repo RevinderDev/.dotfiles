@@ -153,8 +153,8 @@ config.adjust_window_size_when_changing_font_size = false
 config.show_new_tab_button_in_tab_bar = false
 config.font_size = 15
 
-local v_border_pt = 0.150 * config.font_size
-local h_border_pt = 0.150 * config.font_size
+local v_border_pt = 0.2050 * config.font_size
+local h_border_pt = 0.2050 * config.font_size
 
 config.window_frame = {
 	border_left_width = tostring(h_border_pt) .. "pt",
