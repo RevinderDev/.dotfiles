@@ -167,17 +167,17 @@ config.window_frame = {
 	border_bottom_color = "#7d7d7d",
 	border_top_color = "#7d7d7d",
 }
-
+config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 -- Keybindings
 local act = wezterm.action
 config.keys = {
 	-- Tabs
-	{ key = "t", mods = "CTRL", action = act.SpawnTab("CurrentPaneDomain") },
-	{ key = "q", mods = "CTRL", action = act.CloseCurrentTab({ confirm = true }) },
-	{ key = "e", mods = "CTRL", action = act.ShowTabNavigator },
+	{ key = "t", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
+	{ key = "q", mods = "LEADER", action = act.CloseCurrentTab({ confirm = true }) },
+	{ key = "e", mods = "LEADER", action = act.ShowTabNavigator },
 	{
 		key = "r",
-		mods = "CTRL|SHIFT",
+		mods = "LEADER",
 		action = act.PromptInputLine({
 			description = "Enter new name for tab",
 			action = wezterm.action_callback(function(window, pane, line)
@@ -192,9 +192,9 @@ config.keys = {
 	},
 
 	-- Panes
-	{ key = "n", mods = "CTRL", action = act({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
-	{ key = "p", mods = "CTRL", action = act({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
-	{ key = "w", mods = "CTRL", action = act.CloseCurrentPane({ confirm = true }) },
+	{ key = "n", mods = "LEADER", action = act({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
+	{ key = "p", mods = "LEADER", action = act({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
+	{ key = "w", mods = "LEADER", action = act.CloseCurrentPane({ confirm = true }) },
 
 	-- Navigating
 	{ key = "LeftArrow", mods = "ALT", action = act.ActivatePaneDirection("Left") },
