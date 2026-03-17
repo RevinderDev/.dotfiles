@@ -123,7 +123,7 @@ alias lg="lazygit"
 function gitc() {
     # Function to generate commit message
     function generate_commit_message() {
-            git diff --cached | llm -m openrouter/minimax/minimax-m2.5 "
+            git diff --cached | llm -m openrouter/google/gemini-3.1-flash-lite-preview -s "
         You are an automated, non-interactive Git commit message generation machine. You are part of a shell pipeline. Your ONLY purpose is to read a git diff and output raw text. 
 
         UNDER NO CIRCUMSTANCES should you ask questions, make suggestions, or converse. If you see garbage, debugging code, or errors in the diff, ignore them and simply document what was added or removed.
