@@ -116,38 +116,14 @@ alias img="wezterm imgcat $@"
 #                        
 alias lg="lazygit"
 # AI-powered Git Commit Function Source: https://gist.github.com/karpathy/1dd0294ef9567971c1e4348a90d69285
-# 1) gets the current staged changed diff
-# 2) sends them to an LLM to write the git commit message
-# 3) allows you to easily accept, edit, regenerate, cancel
-# But - just read and edit the code however you like
-function gitc() {
-    # Function to generate commit message
+# Core function that accepts a system prompt as an argument
+function _git_commit_with_prompt() {
+    local system_prompt="$1"
+
     function generate_commit_message() {
-            git diff --cached | llm -m openrouter/google/gemini-3.1-flash-lite-preview -s "
-        You are an automated, non-interactive Git commit message generation machine. You are part of a shell pipeline. Your ONLY purpose is to read a git diff and output raw text. 
-
-        UNDER NO CIRCUMSTANCES should you ask questions, make suggestions, or converse. If you see garbage, debugging code, or errors in the diff, ignore them and simply document what was added or removed.
-
-        Analyze the diff and generate a commit message following the Conventional Commits specification.
-
-        STRICT RULES:
-        1. Identify the PRIMARY change to determine the commit type (feat, fix, docs, style, refactor, perf, test, chore).
-        2. Write a subject line (max 50 chars): <type>(<optional scope>): <short description>.
-        3. Leave exactly one blank line after the subject.
-        4. Write a detailed body explaining the motivation for the main change and listing secondary changes.
-        5. NO MARKDOWN. Do not use backticks (\`\`\`).
-        6. NO CONVERSATION. Do not output anything like 'Here is the commit' or 'Would you like to change this?'.
-
-        OUTPUT TEMPLATE:
-        <type>(<scope>): <subject>
-
-        <body>
-
-        DIFF TO ANALYZE:
-        "
+        git diff --cached | llm -m openrouter/google/gemini-3.1-flash-lite-preview -s "$system_prompt"
     }
 
-    # Function to read user input compatibly with both Bash and Zsh
     function read_input() {
         if [ -n "$ZSH_VERSION" ]; then
             echo -n "$1"
@@ -157,8 +133,8 @@ function gitc() {
         fi
     }
 
-    # Main script
     echo "🤖 Generating AI-powered commit message..."
+    local commit_message
     commit_message=$(generate_commit_message)
 
     if [ $? -ne 0 ] || [ -z "$commit_message" ]; then
@@ -171,7 +147,7 @@ function gitc() {
         echo "$commit_message"
 
         read_input "\nDo you want to (a)ccept, (e)dit, (r)egenerate, or (c)ancel? "
-        choice=$REPLY
+        local choice=$REPLY
 
         case "$choice" in
             a|A )
@@ -185,6 +161,7 @@ function gitc() {
                 ;;
             e|E )
                 # Create a temporary file to hold the commit message
+                local tmp_file
                 tmp_file=$(mktemp)
                 echo "$commit_message" > "$tmp_file"
                 
@@ -222,6 +199,86 @@ function gitc() {
                 ;;
         esac
     done
+}
+function gitprdesc() {
+    local prompt='
+    You are an automated Pull Request description generator. 
+    Your ONLY purpose is to read a git diff of a feature branch and output a PR description in Markdown.
+
+    STRICT RULES:
+    1. Provide a high-level summary of the overall goal or feature added.
+    2. Provide a bulleted list of the specific changes made. Group them logically if there are many.
+    3. Keep it professional, concise, and structured.
+    4. If there are commit messages that are good enough, you can keep them in the list, but skip any useless messages such as "test" or "bump".
+    5. NO CONVERSATION. Do not output anything like "Here is your description". Just output the raw Markdown.
+    '
+    opencode run --model openrouter/google/gemini-3.1-flash-lite-preview $prompt
+}
+
+function gitprc() {
+    local prompt='
+    You are an expert Software Engineer specializing in Git archaeology and the Conventional Commits standard. Your goal is to analyze a branch history and generate a single, perfectly formatted semantic commit message for a squash-and-merge.
+
+    1. Analyze the current branch and compare it against the base branch (e.g., `main` or `master`).
+    2. Summarize all atomic changes into one cohesive, strictly formatted semantic commit message.
+
+    - **Structure:** <type>[optional scope]: <description>
+    - **Subject Line:** - Use imperative, present tense ("add", not "added" or "adds").
+        - No period at the end.
+        - Maximum 50 characters.
+    - **Body:** - Use a bulleted list for the specific changes.
+        - Explain the "what" and "why," not just the "how."
+        - Wrap lines at 72 characters.
+    - **Types:** You must use exactly one of these:
+        - `feat`: A new feature.
+        - `fix`: A bug fix.
+        - `docs`: Documentation only.
+        - `style`: Formatting, missing semi-colons, etc. (no logic change).
+        - `refactor`: Code change that neither fixes a bug nor adds a feature.
+        - `perf`: Code change that improves performance.
+        - `test`: Adding or correcting tests.
+        - `chore`: Build process, dependencies, or auxiliary tools.
+
+    If the changes contain breaking API or logic, append a `!` after the type/scope and include a `BREAKING CHANGE:` footer detailing the migration/impact.
+
+    Gather the diff and commit history for the current branch now. Generate the final squash commit message based on your findings.
+    '
+    opencode run --model openrouter/google/gemini-3.1-flash-lite-preview $prompt
+}
+
+function gitcs() {
+    local prompt='
+    Below is a diff of all staged changes, coming from the command:
+    \`\`\`
+    git diff --cached
+    \`\`\`
+    Please generate a concise, one-line commit message for these changes.'
+    _git_commit_with_prompt "$prompt"
+}
+
+function gitcl() {
+    local prompt='
+    You are an automated, non-interactive Git commit message generation machine. You are part of a shell pipeline. Your ONLY purpose is to read a git diff and output raw text. 
+
+    UNDER NO CIRCUMSTANCES should you ask questions, make suggestions, or converse. If you see garbage, debugging code, or errors in the diff, ignore them and simply document what was added or removed.
+
+    Analyze the diff and generate a commit message following the Conventional Commits specification.
+
+    STRICT RULES:
+    1. Identify the PRIMARY change to determine the commit type (feat, fix, docs, style, refactor, perf, test, chore).
+    2. Write a subject line (max 50 chars): <type>(<optional scope>): <short description>.
+    3. Leave exactly one blank line after the subject.
+    4. Write a detailed body explaining the motivation for the main change and listing secondary changes.
+    5. NO MARKDOWN. Do not use backticks (```).
+    6. NO CONVERSATION. Do not output anything like "Here is the commit" or "Would you like to change this?".
+
+    OUTPUT TEMPLATE:
+    <type>(<scope>): <subject>
+
+    <body>
+
+    DIFF TO ANALYZE:'
+    _git_commit_with_prompt "$prompt"
 }
 # ===================================================
 
