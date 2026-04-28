@@ -76,26 +76,16 @@ helprev() {
 }
 # Hurl
 # @desc Hurl with pipe to jq
-function hurljq {
-  command hurl "$@" | jq
-}
-
+hurljq() { command hurl "$@" | jq }
 # @desc Hurl with pipe to csvlook
-function hurlcsv {
-  command hurl "$@" | csvlook 
-}
+hurlcsv() { command hurl "$@" | csvlook }
 
-function echo_red() {
-    echo -e "\033[31m$*\033[0m"
-}
-
-function echo_green() {
-    echo -e "\033[32m$*\033[0m"
-}
-
-function echo_yellow() {
-    echo -e "\033[33m$*\033[0m"
-}
+# Custom printings
+echo_red()    { echo -e "\033[31m$*\033[0m"; }
+echo_green()  { echo -e "\033[32m$*\033[0m"; }
+echo_yellow() { echo -e "\033[33m$*\033[0m"; }
+echo_blue()   { echo -e "\033[34m$*\033[0m"; } 
+echo_cyan()   { echo -e "\033[36m$*\033[0m"; }
 
 function clear-scrollback-buffer {
   # Behavior of clear: 
@@ -131,14 +121,12 @@ alias lg="lazygit"
 typeset -g llm_model="openrouter/deepseek/deepseek-v4-flash"
 # AI-powered Git Commit Function Source: https://gist.github.com/karpathy/1dd0294ef9567971c1e4348a90d69285
 # Core function that accepts a system prompt as an argument
-function _git_commit_with_prompt() {
+_git_commit_with_prompt() {
     local system_prompt="$1"
-
-    function generate_commit_message() {
+    generate_commit_message() {
         git diff --cached | llm -m "$llm_model" -s "$system_prompt"
     }
-
-    function read_input() {
+    read_input() {
         if [ -n "$ZSH_VERSION" ]; then
             echo -n "$1"
             read -r REPLY
@@ -216,7 +204,7 @@ function _git_commit_with_prompt() {
 }
 
 # @desc Generate pull request *description* using opencode agent.
-function gitprdesc() {
+gitprdesc() {
     local prompt='
     You are an automated Pull Request description generator. 
     Your ONLY purpose is to read a git diff of a feature branch and output a PR description in Markdown.
@@ -232,7 +220,7 @@ function gitprdesc() {
 }
 
 # @desc Generate pull request *commit* using opencode agent.
-function gitprc() {
+gitprc() {
     local prompt='
     You are an expert Software Engineer specializing in Git archaeology and the Conventional Commits standard. Your goal is to analyze a branch history and generate a single, perfectly formatted semantic commit message for a squash-and-merge.
 
@@ -264,7 +252,7 @@ function gitprc() {
 }
 
 # @desc Generate short concise, one-line commit message using llm.
-function gitcs() {
+gitcs() {
     local prompt='
     Below is a diff of all staged changes, coming from the command:
     \`\`\`
@@ -275,7 +263,7 @@ function gitcs() {
 }
 
 # @desc Generate longer semantic commit message using llm.
-function gitcl() {
+gitcl() {
     local prompt='
     You are an automated, non-interactive Git commit message generation machine. You are part of a shell pipeline. Your ONLY purpose is to read a git diff and output raw text. 
 
@@ -315,14 +303,13 @@ pomo_options[work]="25"
 pomo_options[break]="5"
 
 # @desc Start pomodoro timer. Support [pomodoro work] | [pomodoro break]
-function pomodoro() {
+pomodoro() {
   local session_type="$1"
   
   if [[ -n "$session_type" && -n "${pomo_options[$session_type]}" ]]; then
-    echo "Pomodoro: $session_type" 
     timer "${pomo_options[$session_type]}m"
   else
-    echo "Invalid pomodoro session type. Use 'work' or 'break'."
+    echo_red "Invalid pomodoro session type. Use 'work' or 'break'."
   fi
 }
 
@@ -349,7 +336,7 @@ typeset -g gpg_id="michal0kasprzyk@gmail.com"
 # @desc Allows to edit secrets.sh.asc file in RAM.
 secrets_edit() {
     if [[ ! -f "$secret_asc" ]]; then
-        print -P "%F{red}Error:%f $secret_asc not found."
+        echo_red "Error: $secret_asc not found."
         return 1
     fi
     local editor="${EDITOR:-vi}"
@@ -357,7 +344,7 @@ secrets_edit() {
 
     # Decrypt straight into RAM
     if ! gpg --quiet --decrypt --output "$ram_file" "$secret_asc"; then
-        print -P "%F{red}Error:%f Decryption failed."
+        echo_red "Error: Decryption failed."
         return 1
     fi
     chmod 600 "$ram_file"
@@ -371,16 +358,16 @@ secrets_edit() {
     local after
     after=$(sha256sum "$ram_file" | awk '{print $1}')
     if [[ "$before" == "$after" ]]; then
-        print -P "%F{cyan}No changes —%f removing temporary file."
+        echo_cyan "No changes — removing temporary file."
         rm -f "$ram_file"
         return 0
     fi
 
     if gpg -ea -r "$gpg_id" --yes --output "$secret_asc" "$ram_file"; then
         rm -f "$ram_file"
-        print -P "%F{green}🔐 Secrets encrypted to %F{blue}$secret_asc%f"
+        echo_green "🔐 Secrets encrypted to $secret_asc"
     else
-        print -P "%F{red}Error:%f Encryption failed — plaintext left at %F{yellow}$ram_file%f"
+        echo_red "Error: Encryption failed — plaintext left at $ram_file"
         return 1
     fi
 }
@@ -391,17 +378,17 @@ secrets_edit() {
 secrets_encrypt() {
     local target_file="${1:-$default_secret_file}"
     if [[ -z "$target_file" || ! -f "$target_file" ]]; then
-        print -P "%F{red}Error:%f File '$target_file' not found."
+        echo_red "Error: File '$target_file' not found."
         return 1
     fi
     local target_asc="${target_file}.asc"
 
     # -e (encrypt), -a (ascii armor), -r (recipient), --yes (overwrite existing)
-    if gpg -ea -r "$gpg_id" --yes --output "$target_asc" "$target_file"; then
-        shred -u "$target_file" 2>/dev/null 
-        print -P "%F{green}Locked:%f '$target_file' encrypted to '$target_asc' and safely removed."
+    if gpg -ea -r "$gpg_id" --yes --output "$target_asc" "$target_file"; then 
+        shred -u "$target_file" 2>/dev/null
+        echo_green "Locked: '$target_file' encrypted to '$target_asc' and safely removed."
     else
-        print -P "%F{red}Error:%f Encryption failed! Plaintext file was NOT removed."
+        echo_red "Error: Encryption failed! Plaintext file was NOT removed."
         return 1
     fi
 }
@@ -409,17 +396,17 @@ secrets_encrypt() {
 # @desc Loads the secrets to given shell session.
 load_secrets() {
     if [[ ! -f "$secret_asc" ]]; then
-        print -P "%F{red}Error:%f Encrypted file not found at $secret_asc"
+        echo_red "Error: Encrypted file not found at $secret_asc"
         return 1
     fi
 
     local decrypted
     if ! decrypted=$(gpg --quiet --decrypt "$secret_asc" 2>/dev/null); then
-        print -P "%F{red}Error:%f Decryption failed (check your GPG agent/passphrase)."
+        echo_red "Error: Decryption failed (check your GPG agent/passphrase)."
         return 1
     fi
 
-    # Parse for display 
+    # Parse for display
     local -a loaded_keys
     for line in ${(f)decrypted}; do
         [[ $line == export\ * ]] && loaded_keys+=(${${line#export }%%=*})
@@ -428,9 +415,9 @@ load_secrets() {
     eval "$decrypted"
     unset decrypted  # get it off from memory.
 
-    print -P "%F{green}✅ Secrets loaded into environment:%f"
+    echo_green "✅ Secrets loaded into environment:"
     for key in $loaded_keys; do
-        print -P "  %F{blue}-%f $key"
+        echo_blue "- $key"
     done
 }
 # ===================================================
