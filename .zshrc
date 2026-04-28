@@ -128,13 +128,14 @@ alias img="wezterm imgcat $@"
 #                        
 #                        
 alias lg="lazygit"
+typeset -g llm_model="openrouter/deepseek/deepseek-v4-flash"
 # AI-powered Git Commit Function Source: https://gist.github.com/karpathy/1dd0294ef9567971c1e4348a90d69285
 # Core function that accepts a system prompt as an argument
 function _git_commit_with_prompt() {
     local system_prompt="$1"
 
     function generate_commit_message() {
-        git diff --cached | llm -m openrouter/google/gemini-3.1-flash-lite-preview -s "$system_prompt"
+        git diff --cached | llm -m "$llm_model" -s "$system_prompt"
     }
 
     function read_input() {
@@ -227,7 +228,7 @@ function gitprdesc() {
     4. If there are commit messages that are good enough, you can keep them in the list, but skip any useless messages such as "test" or "bump".
     5. NO CONVERSATION. Do not output anything like "Here is your description". Just output the raw Markdown.
     '
-    opencode run --model openrouter/google/gemini-3.1-flash-lite-preview $prompt
+    opencode run --model "$llm_model" $prompt
 }
 
 # @desc Generate pull request *commit* using opencode agent.
@@ -259,7 +260,7 @@ function gitprc() {
 
     Gather the diff and commit history for the current branch now. Generate the final squash commit message based on your findings.
     '
-    opencode run --model openrouter/google/gemini-3.1-flash-lite-preview $prompt
+    opencode run --model "$llm_model" $prompt
 }
 
 # @desc Generate short concise, one-line commit message using llm.
