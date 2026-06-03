@@ -37,7 +37,10 @@ export FZF_BASE=/usr/bin/fzf
 
 # Zellij
 export ZELLIJ_CONFIG_FILE=~/.config/zellij/config.kdl
-
+# @desc 
+alias zjs="zellij -l welcome"
+# @desc 
+alias zj="zellij -l compact"
 
 # Golang
 export PATH=$PATH:/usr/local/go/bin
@@ -45,6 +48,8 @@ export PATH=$PATH:$HOME/go/bin
 
 # Neovim
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+
+# @desc 
 alias neovide="neovide --fork --frame none"
 export EDITOR="nvim"
 export SUDO_EDITOR="$EDITOR"
@@ -62,17 +67,50 @@ export NVM_DIR="/home/michal/.nvm"
 #    ▀██████▀  ██   ██▄ ██ ▄▄▄█▀ 
 #                                
 #                                
-# @desc Displays this list of custom registered functions
+# @desc Displays this list of custom registered functions and aliases
 helprev() {
-    print -P "\n%F{green}Helper functions: %f"
-    awk '/^# @desc / { 
-        desc = substr($0, 9); 
-        getline; 
-        gsub(/[(){]/, "", $1); 
-        name = ($1 == "function") ? $2 : $1; 
-        printf "  \033[36m%-20s\033[0m %s\n", name, desc 
-    }' ~/.zshrc
-    echo "" 
+    awk '
+    BEGIN {
+        cyan = "\033[36m"; reset = "\033[0m"
+    }
+    /^# @desc / {
+        desc = substr($0, 9)
+
+        # Skip blank lines until we hit the actual definition
+        do { getline } while ($0 ~ /^[[:space:]]*$/)
+        line = $0
+
+        if ($1 == "alias") {
+            # Handle global/other flags like: alias -g X=...
+            item = ($2 ~ /^-/) ? $3 : $2
+            split(item, parts, "=")
+            name = parts[1]
+
+            # If no description was given, use the quoted command body
+            if (desc ~ /^[[:space:]]*$/) {
+                if (match(line, /"[^"]*"/)) {
+                    desc = substr(line, RSTART + 1, RLENGTH - 2)
+                } else if (match(line, /'\''[^'\'']*'\''/)) {
+                    desc = substr(line, RSTART + 1, RLENGTH - 2)
+                }
+            }
+
+            aliases[++a] = sprintf("  %s%-20s%s %s", cyan, name, reset, desc)
+        } else {
+            gsub(/[(){]/, "", line)
+            split(line, f, " ")
+            name = (f[1] == "function") ? f[2] : f[1]
+            funcs[++n] = sprintf("  %s%-20s%s %s", cyan, name, reset, desc)
+        }
+    }
+    END {
+        print "\n\033[32mHelper Functions:\033[0m"
+        for (i = 1; i <= n; i++) print funcs[i]
+        print "\n\033[32mAliases:\033[0m"
+        for (i = 1; i <= a; i++) print aliases[i]
+        print ""
+    }
+    ' ~/.zshrc
 }
 # Hurl
 # @desc Hurl with pipe to jq
@@ -104,8 +142,8 @@ zle -N clear-scrollback-buffer
 bindkey '^L' clear-scrollback-buffer
 bindkey '^ ' autosuggest-accept
 
+# @desc 
 alias ls="eza -a -l --header --icons --time-style relative --group-directories-first"
-alias img="wezterm imgcat $@"
 # ===================================================
 
 # ===================================================
@@ -117,6 +155,7 @@ alias img="wezterm imgcat $@"
 #    ▀██████▀  ██▄  ██   
 #                        
 #                        
+# @desc 
 alias lg="lazygit"
 typeset -g llm_model="openrouter/deepseek/deepseek-v4-flash"
 # AI-powered Git Commit Function Source: https://gist.github.com/karpathy/1dd0294ef9567971c1e4348a90d69285
@@ -313,7 +352,9 @@ pomodoro() {
   fi
 }
 
-alias workdo='pomodoro work'
+# @desc 
+alias workdo="pomodoro work"
+# @desc 
 alias workbreak='pomodoro break'
 
 # ===================================================
@@ -386,6 +427,7 @@ secrets_encrypt() {
     # -e (encrypt), -a (ascii armor), -r (recipient), --yes (overwrite existing)
     if gpg -ea -r "$gpg_id" --yes --output "$target_asc" "$target_file"; then 
         shred -u "$target_file" 2>/dev/null
+        chmod 600 "$target_asc"
         echo_green "Locked: '$target_file' encrypted to '$target_asc' and safely removed."
     else
         echo_red "Error: Encryption failed! Plaintext file was NOT removed."
