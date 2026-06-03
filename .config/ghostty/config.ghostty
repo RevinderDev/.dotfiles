@@ -1,9 +1,5 @@
-font-family = "IosevkaTerm Nerd Font"
+font-family = IosevkaTerm NF
 font-size = 15
-
-# Ghostty enables standard ligatures by default, but you can explicitly pass them:
-font-feature = liga
-font-feature = clig
 
 # Window & Transparency
 window-decoration = none
