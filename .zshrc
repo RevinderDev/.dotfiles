@@ -36,7 +36,7 @@ export FZF_BASE=/usr/bin/fzf
 
 
 # Zellij
-export ZELLIJ_CONFIG_FILE=~/.config/zellij/config.kdl
+export ZELLIJ_CONFIG_FILE="$HOME/.config/zellij/zellij.kdl"
 # @desc 
 alias zjs="zellij -l welcome"
 # @desc 
