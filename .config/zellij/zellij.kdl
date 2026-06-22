@@ -1,6 +1,8 @@
 keybinds clear-defaults=true {
     locked {
         bind "Ctrl space" { SwitchToMode "normal"; }
+        bind "Ctrl Alt l" { GoToNextTab; }
+        bind "Ctrl Alt h" { GoToPreviousTab; }
     }
     pane {
         bind "left" { MoveFocus "left"; }
