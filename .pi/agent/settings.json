@@ -6,6 +6,7 @@
   "theme": "dark",
   "enableInstallTelemetry": false,
   "packages": [
-    "npm:pi-web-access"
+    "npm:pi-web-access",
+    "git:github.com/jonjonrankin/pi-caveman"
   ]
 }
