@@ -14,3 +14,5 @@ In all honesty, this is meant for personal use only and I rarely change systems,
 
 * `tools.sh` - contains list of specific tools that I use on a daily basis
 * `gnome.sh` - contains gnome specific tools. There are some dconf configs for `openbar` and `roundedcorners` extensions that need to be loaded. See .config
+* `gnome-keybinds.sh` - contains gnome specific keybinds to be registered.
+
