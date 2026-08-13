@@ -46,6 +46,9 @@ alias zj="zellij -l compact"
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
 
+# Kubectl
+alias kubectl="kubecolor"
+
 # Neovim
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 
