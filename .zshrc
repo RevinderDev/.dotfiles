@@ -48,6 +48,9 @@ export PATH=$PATH:$HOME/go/bin
 
 # Kubectl
 alias kubectl="kubecolor"
+# Retain autocompletion when using kubecolor
+compdef kubecolor=kubectl
+compdef k=kubectl
 
 # Neovim
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
