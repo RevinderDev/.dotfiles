@@ -45,30 +45,41 @@ alias zj="zellij -l compact"
 if [[ -n $ZELLIJ ]]; then
     autoload -U add-zsh-hook
 
-    # Helper function to extract git repo name
-    _zellij_git_prefix() {
-        local git_root
-        git_root=$(git rev-parse --show-toplevel 2>/dev/null)
-        if [[ -n "$git_root" ]]; then
-            echo "[${git_root##*/}] "
-        fi
-    }
-
-    # 1. Tab name when idle: [repo] current_folder OR current_folder
+    # 1. Idle state logic
     set_zellij_tab_dir() {
-        local prefix
-        prefix=$(_zellij_git_prefix)
-        local dir_name="${PWD##*/}"
-        [[ -z "$dir_name" ]] && dir_name="/"
-        nohup zellij action rename-tab "${prefix}${dir_name}" >/dev/null 2>&1
+        local git_root repo_name tab_name
+        git_root=$(git rev-parse --show-toplevel 2>/dev/null)
+
+        if [[ -n "$git_root" ]]; then
+            repo_name="${git_root##*/}"
+            # Check if current directory IS the root directory
+            if [[ "$PWD" == "$git_root" ]]; then
+                tab_name="[$repo_name]"
+            else
+                tab_name="[$repo_name] ${PWD##*/}"
+            fi
+        else
+            tab_name="${PWD##*/}"
+            [[ -z "$tab_name" ]] && tab_name="/"
+        fi
+
+        nohup zellij action rename-tab "$tab_name" >/dev/null 2>&1
     }
 
-    # 2. Tab name during execution: [repo] command OR command
+    # 2. Command execution state logic
     set_zellij_tab_cmd() {
-        local prefix
-        prefix=$(_zellij_git_prefix)
-        local cmd_name="${1%% *}"
-        nohup zellij action rename-tab "${prefix}${cmd_name}" >/dev/null 2>&1
+        local git_root repo_name cmd_name tab_name
+        git_root=$(git rev-parse --show-toplevel 2>/dev/null)
+        cmd_name="${1%% *}"
+
+        if [[ -n "$git_root" ]]; then
+            repo_name="${git_root##*/}"
+            tab_name="[$repo_name] $cmd_name"
+        else
+            tab_name="$cmd_name"
+        fi
+
+        nohup zellij action rename-tab "$tab_name" >/dev/null 2>&1
     }
 
     add-zsh-hook precmd set_zellij_tab_dir
