@@ -41,12 +41,46 @@ export ZELLIJ_CONFIG_FILE="$HOME/.config/zellij/zellij.kdl"
 alias zjs="zellij -l welcome"
 # @desc 
 alias zj="zellij -l compact"
+## Hook to rename Zellij tabs.
+if [[ -n $ZELLIJ ]]; then
+    autoload -U add-zsh-hook
+
+    # Helper function to extract git repo name
+    _zellij_git_prefix() {
+        local git_root
+        git_root=$(git rev-parse --show-toplevel 2>/dev/null)
+        if [[ -n "$git_root" ]]; then
+            echo "[${git_root##*/}] "
+        fi
+    }
+
+    # 1. Tab name when idle: [repo] current_folder OR current_folder
+    set_zellij_tab_dir() {
+        local prefix
+        prefix=$(_zellij_git_prefix)
+        local dir_name="${PWD##*/}"
+        [[ -z "$dir_name" ]] && dir_name="/"
+        nohup zellij action rename-tab "${prefix}${dir_name}" >/dev/null 2>&1
+    }
+
+    # 2. Tab name during execution: [repo] command OR command
+    set_zellij_tab_cmd() {
+        local prefix
+        prefix=$(_zellij_git_prefix)
+        local cmd_name="${1%% *}"
+        nohup zellij action rename-tab "${prefix}${cmd_name}" >/dev/null 2>&1
+    }
+
+    add-zsh-hook precmd set_zellij_tab_dir
+    add-zsh-hook preexec set_zellij_tab_cmd
+fi
 
 # Golang
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
 
 # Kubectl
+# @desc 
 alias kubectl="kubecolor"
 # Retain autocompletion when using kubecolor
 compdef kubecolor=kubectl
@@ -470,6 +504,7 @@ load_secrets() {
 }
 # ===================================================
 
+# @desc
 alias python="python3"
 export PATH="$PATH:/home/michal/.local/bin"
 eval "$(uv generate-shell-completion zsh)"
