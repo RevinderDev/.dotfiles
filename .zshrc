@@ -208,28 +208,23 @@ alias ls="eza -a -l --header --icons --time-style relative --group-directories-f
 #                        
 # @desc 
 alias lg="lazygit"
-typeset -g llm_model="openrouter/deepseek/deepseek-v4-flash"
 # AI-powered Git Commit Function Source: https://gist.github.com/karpathy/1dd0294ef9567971c1e4348a90d69285
 # Core function that accepts a system prompt as an argument
+typeset -g llm_model="openai/gpt-5.6-luna" 
+
 _git_commit_with_prompt() {
     local system_prompt="$1"
+    
     generate_commit_message() {
-        git diff --cached | llm -m "$llm_model" -s "$system_prompt"
-    }
-    read_input() {
-        if [ -n "$ZSH_VERSION" ]; then
-            echo -n "$1"
-            read -r REPLY
-        else
-            read -p "$1" -r REPLY
-        fi
+        git diff --cached | pi -p --model "$llm_model" --no-tools --no-session --system-prompt "$system_prompt"
     }
 
     echo "🤖 Generating AI-powered commit message..."
     local commit_message
     commit_message=$(generate_commit_message)
 
-    if [ $? -ne 0 ] || [ -z "$commit_message" ]; then
+    # Native Zsh double brackets prevent string splitting errors
+    if [[ $? -ne 0 || -z "$commit_message" ]]; then
         echo_red "Error: Failed to generate commit message. Exiting."
         return 1
     fi
@@ -238,8 +233,10 @@ _git_commit_with_prompt() {
         echo -e "\nProposed commit message:\n"
         echo "$commit_message"
 
-        read_input "\nDo you want to (a)ccept, (e)dit, (r)egenerate, or (c)ancel? "
-        local choice=$REPLY
+        # Zsh-native prompt reading
+        read -r "choice?
+
+Do you want to (a)ccept, (e)dit, (r)egenerate, or (c)ancel? "
 
         case "$choice" in
             a|A )
@@ -252,20 +249,16 @@ _git_commit_with_prompt() {
                 fi
                 ;;
             e|E )
-                # Create a temporary file to hold the commit message
-                local tmp_file
-                tmp_file=$(mktemp)
+                local tmp_file=$(mktemp)
                 echo "$commit_message" > "$tmp_file"
                 
-                # Open the file in nvim
+                # Temporary file
                 nvim "$tmp_file"
                 
-                # Read the edited message back and clean up the temp file
                 commit_message=$(cat "$tmp_file")
                 rm -f "$tmp_file"
 
-                # Abort if the user deleted all text in the editor
-                if [ -z "$commit_message" ]; then
+                if [[ -z "$commit_message" ]]; then
                     echo_yellow "\nCommit message is empty. Commit cancelled."
                     return 1
                 fi
@@ -293,8 +286,11 @@ _git_commit_with_prompt() {
     done
 }
 
-# @desc Generate pull request *description* using opencode agent.
+# @desc Generate pull request *description* using pi agent.
 gitprdesc() {
+    local base_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
+    base_branch=${base_branch:-main}
+
     local prompt='
     You are an automated Pull Request description generator. 
     Your ONLY purpose is to read a git diff of a feature branch and output a PR description in Markdown.
@@ -306,15 +302,18 @@ gitprdesc() {
     4. If there are commit messages that are good enough, you can keep them in the list, but skip any useless messages such as "test" or "bump".
     5. NO CONVERSATION. Do not output anything like "Here is your description". Just output the raw Markdown.
     '
-    opencode run --model "$llm_model" $prompt
+    git diff "$base_branch"...HEAD | pi -p --model "$llm_model" --no-tools --no-session --system-prompt "$prompt"
 }
 
-# @desc Generate pull request *commit* using opencode agent.
+# @desc Generate pull request *commit* using pi agent.
 gitprc() {
+    local base_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
+    base_branch=${base_branch:-main}
+
     local prompt='
     You are an expert Software Engineer specializing in Git archaeology and the Conventional Commits standard. Your goal is to analyze a branch history and generate a single, perfectly formatted semantic commit message for a squash-and-merge.
 
-    1. Analyze the current branch and compare it against the base branch (e.g., `main` or `master`).
+    1. Analyze the diff and commit history provided below.
     2. Summarize all atomic changes into one cohesive, strictly formatted semantic commit message.
 
     - **Structure:** <type>[optional scope]: <description>
@@ -336,23 +335,25 @@ gitprc() {
 
     If the changes contain breaking API or logic, append a `!` after the type/scope and include a `BREAKING CHANGE:` footer detailing the migration/impact.
 
-    Gather the diff and commit history for the current branch now. Generate the final squash commit message based on your findings.
+    NO CONVERSATION. Output only the raw final squash commit message.
     '
-    opencode run --model "$llm_model" $prompt
+    {
+        echo "=== COMMIT LOG ==="
+        git log "$base_branch"...HEAD --oneline
+        echo -e "\n=== DIFF ==="
+        git diff "$base_branch"...HEAD
+    } | pi -p --model "$llm_model" --no-tools --no-session --system-prompt "$prompt"
 }
 
-# @desc Generate short concise, one-line commit message using llm.
+# @desc Generate short concise, one-line commit message using pi.
 gitcs() {
     local prompt='
-    Below is a diff of all staged changes, coming from the command:
-    \`\`\`
-    git diff --cached
-    \`\`\`
+    Below is a diff of all staged changes coming from git diff --cached.
     Please generate a concise, one-line commit message for these changes.'
     _git_commit_with_prompt "$prompt"
 }
 
-# @desc Generate longer semantic commit message using llm.
+# @desc Generate longer semantic commit message using pi.
 gitcl() {
     local prompt='
     You are an automated, non-interactive Git commit message generation machine. You are part of a shell pipeline. Your ONLY purpose is to read a git diff and output raw text. 
@@ -363,7 +364,7 @@ gitcl() {
 
     STRICT RULES:
     1. Identify the PRIMARY change to determine the commit type (feat, fix, docs, style, refactor, perf, test, chore).
-    2. Write a subject line (max 50 chars): <type>(<optional scope>): <short description>.
+    2. Write a subject line (max 50 chars): <type>(<optional scope>): <subject>.
     3. Leave exactly one blank line after the subject.
     4. Write a detailed body explaining the motivation for the main change and listing secondary changes.
     5. NO MARKDOWN. Do not use backticks (```).
@@ -372,9 +373,7 @@ gitcl() {
     OUTPUT TEMPLATE:
     <type>(<scope>): <subject>
 
-    <body>
-
-    DIFF TO ANALYZE:'
+    <body>'
     _git_commit_with_prompt "$prompt"
 }
 # ===================================================
