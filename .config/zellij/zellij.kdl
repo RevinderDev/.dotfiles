@@ -173,6 +173,7 @@ keybinds clear-defaults=true {
         bind "Alt o" { MoveTab "right"; }
         bind "Alt p" { TogglePaneInGroup; }
         bind "Alt Shift p" { ToggleGroupMarking; }
+        bind "Ctrl Shift s" { EditScrollback; SwitchToMode "locked"; }
     }
     shared_except "locked" "renametab" "renamepane" {
         bind "Ctrl space" { SwitchToMode "locked"; }

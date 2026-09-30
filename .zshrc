@@ -86,6 +86,11 @@ if [[ -n $ZELLIJ ]]; then
     add-zsh-hook preexec set_zellij_tab_cmd
 fi
 
+# @desc Multine edit command bound to `<CTRL>p`
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^P" edit-command-line
+
 # Golang
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
