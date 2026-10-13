@@ -215,13 +215,14 @@ alias ls="eza -a -l --header --icons --time-style relative --group-directories-f
 alias lg="lazygit"
 # AI-powered Git Commit Function Source: https://gist.github.com/karpathy/1dd0294ef9567971c1e4348a90d69285
 # Core function that accepts a system prompt as an argument
-typeset -g llm_model="openai/gpt-5.6-luna" 
+typeset -g llm_provider="openrouter"
+typeset -g llm_model="openai/gpt-6-luna" 
 
 _git_commit_with_prompt() {
     local system_prompt="$1"
     
     generate_commit_message() {
-        git diff --cached | pi -p --model "$llm_model" --no-tools --no-session --system-prompt "$system_prompt"
+        git diff --cached | pi -p --provider "$llm_provider" --model "$llm_model" --no-tools --no-session --no-extensions --system-prompt "$system_prompt"
     }
 
     echo "🤖 Generating AI-powered commit message..."
@@ -291,6 +292,18 @@ Do you want to (a)ccept, (e)dit, (r)egenerate, or (c)ancel? "
     done
 }
 
+# Print branch/base/commit info header before PR generation output.
+_git_print_pr_header() {
+    local base_branch="$1"
+    echo_cyan "Branch:      $(git branch --show-current 2>/dev/null || git rev-parse --short HEAD)"
+    echo_cyan "Base branch: $base_branch"
+    echo_cyan "Commits:"
+    git log "$base_branch"...HEAD --format='- %h %s'
+    echo ""
+    echo_cyan "──────────────────────────────────────────"
+    echo ""
+}
+
 # @desc Generate pull request *description* using pi agent.
 gitprdesc() {
     local base_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
@@ -307,7 +320,13 @@ gitprdesc() {
     4. If there are commit messages that are good enough, you can keep them in the list, but skip any useless messages such as "test" or "bump".
     5. NO CONVERSATION. Do not output anything like "Here is your description". Just output the raw Markdown.
     '
-    git diff "$base_branch"...HEAD | pi -p --model "$llm_model" --no-tools --no-session --system-prompt "$prompt"
+    _git_print_pr_header "$base_branch"
+    {
+        echo "=== COMMIT LOG ==="
+        git log "$base_branch"...HEAD --oneline
+        echo -e "\n=== DIFF ==="
+        git diff "$base_branch"...HEAD
+    } | pi -p --provider "$llm_provider" --model "$llm_model" --no-tools --no-session --no-extensions --system-prompt "$prompt"
 }
 
 # @desc Generate pull request *commit* using pi agent.
@@ -342,12 +361,13 @@ gitprc() {
 
     NO CONVERSATION. Output only the raw final squash commit message.
     '
+    _git_print_pr_header "$base_branch"
     {
         echo "=== COMMIT LOG ==="
         git log "$base_branch"...HEAD --oneline
         echo -e "\n=== DIFF ==="
         git diff "$base_branch"...HEAD
-    } | pi -p --model "$llm_model" --no-tools --no-session --system-prompt "$prompt"
+    } | pi -p --provider "$llm_provider" --model "$llm_model" --no-tools --no-session --no-extensions --system-prompt "$prompt"
 }
 
 # @desc Generate short concise, one-line commit message using pi.
