@@ -373,7 +373,7 @@ gitprc() {
 gitcs() {
     local prompt='
     Below is a diff of all staged changes coming from git diff --cached.
-    Please generate a concise, one-line commit message for these changes.'
+    Please generate a concise, one-line semantic commit message for these changes.'
     _git_commit_with_prompt "$prompt"
 }
 
