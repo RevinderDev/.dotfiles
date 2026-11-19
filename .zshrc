@@ -215,14 +215,13 @@ alias ls="eza -a -l --header --icons --time-style relative --group-directories-f
 alias lg="lazygit"
 # AI-powered Git Commit Function Source: https://gist.github.com/karpathy/1dd0294ef9567971c1e4348a90d69285
 # Core function that accepts a system prompt as an argument
-typeset -g llm_provider="openrouter"
-typeset -g llm_model="openai/gpt-6-luna" 
+typeset -g llm_model="opus"
 
 _git_commit_with_prompt() {
     local system_prompt="$1"
     
     generate_commit_message() {
-        git diff --cached | pi -p --provider "$llm_provider" --model "$llm_model" --no-tools --no-session --no-extensions --system-prompt "$system_prompt"
+        git diff --cached | claude -p --model "$llm_model" --tools "" --no-session-persistence --strict-mcp-config --disable-slash-commands --setting-sources "" --system-prompt "$system_prompt"
     }
 
     echo "🤖 Generating AI-powered commit message..."
@@ -304,7 +303,7 @@ _git_print_pr_header() {
     echo ""
 }
 
-# @desc Generate pull request *description* using pi agent.
+# @desc Generate pull request *description* using claude code.
 gitprdesc() {
     local base_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
     base_branch=${base_branch:-main}
@@ -326,10 +325,10 @@ gitprdesc() {
         git log "$base_branch"...HEAD --oneline
         echo -e "\n=== DIFF ==="
         git diff "$base_branch"...HEAD
-    } | pi -p --provider "$llm_provider" --model "$llm_model" --no-tools --no-session --no-extensions --system-prompt "$prompt"
+    } | claude -p --model "$llm_model" --tools "" --no-session-persistence --strict-mcp-config --disable-slash-commands --setting-sources "" --system-prompt "$prompt"
 }
 
-# @desc Generate pull request *commit* using pi agent.
+# @desc Generate pull request *commit* using claude code.
 gitprc() {
     local base_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
     base_branch=${base_branch:-main}
@@ -367,10 +366,10 @@ gitprc() {
         git log "$base_branch"...HEAD --oneline
         echo -e "\n=== DIFF ==="
         git diff "$base_branch"...HEAD
-    } | pi -p --provider "$llm_provider" --model "$llm_model" --no-tools --no-session --no-extensions --system-prompt "$prompt"
+    } | claude -p --model "$llm_model" --tools "" --no-session-persistence --strict-mcp-config --disable-slash-commands --setting-sources "" --system-prompt "$prompt"
 }
 
-# @desc Generate short concise, one-line commit message using pi.
+# @desc Generate short concise, one-line commit message using claude code.
 gitcs() {
     local prompt='
     Below is a diff of all staged changes coming from git diff --cached.
@@ -378,7 +377,7 @@ gitcs() {
     _git_commit_with_prompt "$prompt"
 }
 
-# @desc Generate longer semantic commit message using pi.
+# @desc Generate longer semantic commit message using claude code.
 gitcl() {
     local prompt='
     You are an automated, non-interactive Git commit message generation machine. You are part of a shell pipeline. Your ONLY purpose is to read a git diff and output raw text. 
