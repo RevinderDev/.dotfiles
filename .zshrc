@@ -303,10 +303,27 @@ _git_print_pr_header() {
     echo ""
 }
 
-# @desc Generate pull request *description* using claude code.
+# Set caller's $base_branch from $1, or list branches and prompt for it.
+_git_select_base_branch() {
+    base_branch="$1"
+    if [[ -z "$base_branch" ]]; then
+        local current=$(git branch --show-current 2>/dev/null || git rev-parse --short HEAD)
+        echo_cyan "Current branch: $current"
+        echo_cyan "Other branches:"
+        git branch --format='%(refname:short)' | grep -vxF "$current" | sed 's/^/  /'
+        echo ""
+        read "base_branch?Branch to compare to: "
+    fi
+    if [[ -z "$base_branch" ]] || ! git rev-parse --verify --quiet "$base_branch^{commit}" >/dev/null; then
+        echo_red "Invalid branch: '$base_branch'"
+        return 1
+    fi
+}
+
+# @desc Generate pull request *description* using claude code. Usage: gitprdesc [base_branch]
 gitprdesc() {
-    local base_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
-    base_branch=${base_branch:-main}
+    local base_branch
+    _git_select_base_branch "$1" || return 1
 
     local prompt='
     You are an automated Pull Request description generator. 
@@ -328,10 +345,10 @@ gitprdesc() {
     } | claude -p --model "$llm_model" --tools "" --no-session-persistence --strict-mcp-config --disable-slash-commands --setting-sources "" --system-prompt "$prompt"
 }
 
-# @desc Generate pull request *commit* using claude code.
+# @desc Generate pull request *commit* using claude code. Usage: gitprc [base_branch]
 gitprc() {
-    local base_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
-    base_branch=${base_branch:-main}
+    local base_branch
+    _git_select_base_branch "$1" || return 1
 
     local prompt='
     You are an expert Software Engineer specializing in Git archaeology and the Conventional Commits standard. Your goal is to analyze a branch history and generate a single, perfectly formatted semantic commit message for a squash-and-merge.
