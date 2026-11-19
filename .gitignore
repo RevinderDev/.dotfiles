@@ -1,20 +1,3 @@
 .pi/agent/sessions/
 .pi/agent/auth.json
 
-.claude/.credentials.json                                                                     
-.claude/.last-cleanup                                                                         
-.claude/history.jsonl                                                                         
-.claude/backups/                                                                              
-.claude/cache/                                                                                
-.claude/downloads/                                                                            
-.claude/file-history/                                                                         
-.claude/plans/                                                                                
-.claude/projects/                                                                             
-.claude/session-env/                                                                          
-.claude/sessions/                                                                             
-.claude/shell-snapshots/                                                                      
-.claude/todos/                                                                                
-.claude/statsig/                                                                              
-.claude/ide/                                                                                  
-.claude/plugins/
-.claude/skills/

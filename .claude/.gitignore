@@ -1,0 +1,14 @@
+# Claude Code writes lots of runtime state here (sessions, history, credentials,
+# caches, telemetry...). Ignore everything and allowlist real config only.
+*
+!.gitignore
+!CLAUDE.md
+!settings.json
+!agents/
+!agents/**
+!commands/
+!commands/**
+!skills/
+!skills/**
+# auto-synced from claude.ai account, not user-authored
+skills/synced/
