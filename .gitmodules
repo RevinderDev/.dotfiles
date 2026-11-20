@@ -4,3 +4,6 @@
 [submodule ".pi"]
 	path = .pi
 	url = git@github.com:RevinderDev/.pi.git
+[submodule ".claude"]
+	path = .claude
+	url = git@github.com:RevinderDev/.claude.git
