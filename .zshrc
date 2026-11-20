@@ -326,15 +326,29 @@ gitprdesc() {
     _git_select_base_branch "$1" || return 1
 
     local prompt='
-    You are an automated Pull Request description generator. 
-    Your ONLY purpose is to read a git diff of a feature branch and output a PR description in Markdown.
+    You are an automated Pull Request description generator in a shell pipeline.
+    Input: a commit log and a git diff of a feature branch. Output: a PR description in Markdown.
 
-    STRICT RULES:
-    1. Provide a high-level summary of the overall goal or feature added.
-    2. Provide a bulleted list of the specific changes made. Group them logically if there are many.
-    3. Keep it professional, concise, and structured.
-    4. If there are commit messages that are good enough, you can keep them in the list, but skip any useless messages such as "test" or "bump".
-    5. NO CONVERSATION. Do not output anything like "Here is your description". Just output the raw Markdown.
+    GOAL: Help a reviewer understand what this PR does in under 30 seconds.
+    Describe changes at the level of features and behavior, not files or lines.
+
+    OUTPUT FORMAT (exactly this):
+    ## Summary
+    <1-3 sentences: what this PR does and, only if evident from the diff or commits, why.>
+
+    ## Changes
+    <3-6 bullets, each a user-visible or architectural change. Group related edits
+    into one bullet. Do not list individual files, functions, or commits.>
+
+    ## Notes for reviewers
+    <Only if applicable: breaking changes, migrations, new config/env vars,
+    dependencies added, risky areas. Omit this section entirely if none.>
+
+    RULES:
+    - Ignore noise: lockfiles, formatting, generated code, trivial renames.
+    - Do not invent motivations not supported by the diff or commit messages.
+    - Do not wrap the output in a code fence.
+    - NO CONVERSATION. Output only the description.
     '
     _git_print_pr_header "$base_branch"
     {
