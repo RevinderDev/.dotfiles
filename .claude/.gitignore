@@ -10,5 +10,6 @@
 !commands/**
 !skills/
 !skills/**
+!statusline-command.sh
 # auto-synced from claude.ai account, not user-authored
 skills/synced/
